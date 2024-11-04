@@ -9,17 +9,17 @@ ul {
     margin: 0;
     display: flex;
     justify-content: center; /* Centre les boutons */
-    background-color: #f2f2f2; /* Change la couleur de fond */
+    background-color: #f7f3e9; /* Fond beige clair */
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet d'élévation */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Ajoute une ombre légère */
 }
 
 /* Style des boutons */
 button {
-    background-color: #4CAF50; /* Couleur de fond des boutons */
-    border: none; /* Retire les bordures */
-    color: white; /* Couleur du texte */
+    background-color: #d9cbb8; /* Beige moyen pour le fond des boutons */
+    border: 1px solid #b8a897; /* Bordure beige plus foncée */
+    color: #5a4e3f; /* Couleur du texte brun */
     padding: 12px 24px; /* Espacement interne */
     margin: 0 5px; /* Espacement entre les boutons */
     text-align: center;
@@ -27,14 +27,15 @@ button {
     display: inline-block;
     font-size: 16px;
     border-radius: 5px; /* Arrondit les coins */
-    transition: background-color 0.3s ease; /* Effet de transition pour le survol */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Effet de transition pour le survol */
 }
 
 button a {
-    color: white; /* Assure que les liens sont blancs */
+    color: inherit; /* Utilise la couleur du bouton pour le lien */
     text-decoration: none; /* Retire le soulignement */
 }
 
 button:hover {
-    background-color: #45a049; /* Change la couleur de fond au survol */
+    background-color: #b8a897; /* Change la couleur de fond au survol */
+    color: #fff; /* Change la couleur du texte au survol */
 }
