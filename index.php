@@ -19,6 +19,7 @@ class Route {
 
     public function executer() {
         if (is_callable($this->action)) {
+            var_dump($this->chemin);  // Affiche la route avec var_dump()
             call_user_func($this->action);
         }
     }
