@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Film{% endblock %}
+
+{% block content %}
+<h2>Ajouter un Film</h2>
+<form action="/films/create" method="post">
+    <div class="mb-3">
+        <label for="title" class="form-label">Titre</label>
+        <input type="text" id="title" name="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="year" class="form-label">Année</label>
+        <input type="text" id="year" name="year" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input type="text" id="type" name="type" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="director" class="form-label">Réalisateur</label>
+        <input type="text" id="director" name="director" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="synopsis" class="form-label">Synopsis</label>
+        <textarea id="synopsis" name="synopsis" class="form-control" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+</form>
+{% endblock %}
