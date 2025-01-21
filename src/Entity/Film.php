@@ -8,23 +8,23 @@ class Film
 {
     private int $id;
     private string $title;
-    private ?string $year = null;
+    private int $year;
     private string $type;
-    private ?string $synopsis = null;
-    private ?string $director = null;
+    private string $synopsis;
+    private string $director;
     private \DateTime $createdAt;
-    private ?\DateTime $deletedAt = null;
-    private ?\DateTime $updatedAt = null;
+    private \DateTime $updatedAt;
+    private ?\DateTime $deletedAt = null; 
+
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function setId(int $id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     public function getTitle(): string
@@ -32,65 +32,50 @@ class Film
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-        return $this;
     }
 
-    public function getYear(): ?string
+    public function getYear(): int
     {
         return $this->year;
     }
 
-    public function setYear(?string $year): self
-    {
-        $this->year = $year;
-        return $this;
-    }
+    public function setYear(int|string $year): void
+{
+    $this->year = (int)$year; 
+}
+
 
     public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(string $type): void
     {
         $this->type = $type;
-        return $this;
     }
 
-    public function getSynopsis(): ?string
+    public function getSynopsis(): string
     {
         return $this->synopsis;
     }
 
-    public function setSynopsis(?string $synopsis): self
+    public function setSynopsis(string $synopsis): void
     {
         $this->synopsis = $synopsis;
-        return $this;
     }
 
-    public function getDirector(): ?string
+    public function getDirector(): string
     {
         return $this->director;
     }
 
-    public function setDirector(?string $director): self
+    public function setDirector(string $director): void
     {
         $this->director = $director;
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTime
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTime $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
-        return $this;
     }
 
     public function getCreatedAt(): \DateTime
@@ -98,20 +83,33 @@ class Film
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
-        return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt): self
+    public function setUpdatedAt(\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTime
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTime $deletedAt): void
+    {
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->deletedAt !== null;
     }
 }

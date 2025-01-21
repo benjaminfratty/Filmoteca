@@ -53,7 +53,6 @@ class FilmController
         $filmRepository = new FilmRepository();
         $film = new Film();
 
-        // Récupérer les données du formulaire
         $film->setTitle($_POST['title']);
         $film->setYear($_POST['year']);
         $film->setType($_POST['type']);
@@ -62,34 +61,106 @@ class FilmController
         $film->setCreatedAt(new \DateTime());
         $film->setUpdatedAt(new \DateTime());
 
-        // Sauvegarder dans la base de données
         $filmRepository->save($film);
 
-        // Rediriger vers la liste des films
         header('Location: /films');
         exit;
     }
 
-    // Afficher le formulaire pour ajouter un film
     echo $this->renderer->render('film/create.html.twig');
 }
 
 
-    public function read(array $queryParams)
-    {
+public function read(array $queryParams)
+{
+    if (!isset($queryParams['id'])) {
+        echo "L'identifiant du film est requis.";
+        return;
+    }
+
+    $filmRepository = new FilmRepository();
+    $film = $filmRepository->find((int)$queryParams['id']);
+
+    if (!$film) {
+        echo "Film introuvable.";
+        return;
+    }
+
+    echo $this->renderer->render('film/read.html.twig', [
+        'film' => $film,
+    ]);
+}
+
+
+public function update(array $queryParams)
+{
+    $filmRepository = new FilmRepository();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($queryParams['id'])) {
+            echo "L'identifiant du film est requis.";
+            return;
+        }
+
+        $filmId = (int)$queryParams['id'];
+        $film = $filmRepository->find($filmId);
+
+        if (!$film) {
+            echo "Film introuvable.";
+            return;
+        }
+
+        $film->setTitle($_POST['title']);
+        $film->setYear((int)$_POST['year']);
+        $film->setType($_POST['type']);
+        $film->setDirector($_POST['director']);
+        $film->setSynopsis($_POST['synopsis']);
+        $film->setUpdatedAt(new \DateTime());
+
+        $filmRepository->update($film);
+
+        header('Location: /films');
+        exit;
+    } else {
+        if (!isset($queryParams['id'])) {
+            echo "L'identifiant du film est requis.";
+            return;
+        }
+
+        $filmId = (int)$queryParams['id'];
+        $film = $filmRepository->find($filmId);
+
+        if (!$film) {
+            echo "Film introuvable.";
+            return;
+        }
+
+        echo $this->renderer->render('film/update.html.twig', [
+            'film' => $film,
+        ]);
+    }
+}
+
+
+    public function delete(array $queryParams)
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($queryParams['id'])) {
+            echo "L'identifiant du film est requis.";
+            return;
+        }
+
         $filmRepository = new FilmRepository();
-        $film = $filmRepository->find((int) $queryParams['id']);
+        $filmId = (int)$queryParams['id'];
 
-        echo $this->renderer->render('film/read.html.twig', ['film' => $film]);
-    }
+        $filmRepository->softDelete($filmId);
 
-    public function update()
-    {
-        echo "Mise à jour d'un film";
+        header('Location: /films');
+        exit;
+    } else {
+        echo "Méthode HTTP non autorisée.";
     }
+}
 
-    public function delete()
-    {
-        echo "Suppression d'un film";
-    }
+
 }

@@ -14,10 +14,10 @@ class Router
         $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 
         // Découpe l'URI pour obtenir la route et l'action
-        $parts = explode('/', $uri); // Exemple : ['film', 'create']
+        $parts = explode('/', $uri); // Exemple : ['film', 'read']
 
         $route = $parts[0] ?? null;   // Exemple : 'film'
-        $action = $parts[1] ?? null; // Exemple : 'create'
+        $action = $parts[1] ?? null; // Exemple : 'read'
 
         // Définit les routes et leurs contrôleurs associés
         $routes = [
